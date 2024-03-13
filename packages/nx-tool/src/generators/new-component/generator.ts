@@ -35,7 +35,7 @@ export async function newComponentGenerator(
 	}
 
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, extendedOptions);
-
+	
 	/**
 	 * Add exports to barrel file:
 	 * Consult examples on nx/react/generators/component 
@@ -57,7 +57,7 @@ export async function newComponentGenerator(
 			const relativePath = path.relative(projectSourceRoot, newComponentPath);
 
 			//console.log({ relativePath })
-			const addExport = addImport( indexSourceFile , `export { ${name}} from './${relativePath}';` )
+			const addExport = addImport( indexSourceFile , `export * from './${relativePath}';` )
 			const changes = applyChangesToString( indexFile, addExport )
 			tree.write(indexFilePath, changes)
 		}
@@ -73,9 +73,26 @@ export async function newComponentGenerator(
 		})
 	}
 
-	if (options.test) {
-		// TODO Component test
+	if ( !options.test ) {
+		const testFile = tree.listChanges().find( c => /.*spec.tsx/.test(c.path) ).path
+		tree.delete(testFile)
 	}
+
+	/* Another approach is to use template literals https://www.youtube.com/live/bZ7RsNTfQPY?si=fdlWqLv1xqJ-Qfz6&t=4500
+	if (options.test) {
+		const componentTest = `
+		import { render } from '@testing-library/react';\n
+		import ${name} from './${fileName}';
+
+		describe('${name}', () => {
+			it('should render successfully', () => {
+				const { baseElement } = render(<${name} />);
+				expect(baseElement).toBeTruthy();
+			});
+		});`
+
+	}
+	*/
 
 
   await formatFiles(tree);
