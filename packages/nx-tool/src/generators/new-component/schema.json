@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "NewComponent",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use?"
+    },
+		"project": {
+      "type": "string",
+      "description": "The project where you want to work.",
+      "x-prompt": "Which project will this component be located in?",
+			"x-dropdown": "projects"
+    },
+		"storybook": {
+			"type": "boolean",
+			"x-prompt": "Do you want to generate a stories file?",
+			"default": false
+		},
+		"test": {
+			"type": "boolean",
+			"x-prompt": "Do you want to generate a test file?",
+			"default": false
+		}
+  },
+  "required": ["name","project"]
+}

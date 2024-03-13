@@ -1,0 +1,18 @@
+import React, { FC } from 'react';
+import styled from 'styled-components'
+
+const Div = styled.div`  `
+
+/* eslint-disable-next-line */
+interface Props {}
+
+const <%= name %>: FC<Props> = () => {
+
+  return (
+		<Div>
+			ChangeMe
+		</Div>
+	);
+};
+
+export default <%= name %>;
