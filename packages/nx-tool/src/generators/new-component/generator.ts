@@ -51,7 +51,7 @@ export async function newComponentGenerator(
 			let indexSourceFile = tsModule.createSourceFile(indexFilePath,indexFile,tsModule.ScriptTarget.Latest, true)
 
 			// Assumes the new component is at 'src/lib/NewComponent' - check `files` folder
-			const newComponentPath = path.join( projectSourceRoot, 'lib', filename);
+			const newComponentPath = path.join( projectSourceRoot, 'lib', filename, filename);
 
 			// Get the relative path from the project source root to the new component
 			const relativePath = path.relative(projectSourceRoot, newComponentPath);
