@@ -14,7 +14,7 @@ import { ensureTypescript } from '@nx/js/src/utils/typescript/ensure-typescript'
 
 import { addImport } from '@nx/react/src/utils/ast-utils'
 
-// TODO import { componentTestGenerator, componentStoryGenerator } from '@nx/react'
+import { componentStoryGenerator } from '@nx/react'
 
 export async function newComponentGenerator(
   tree: Tree,
@@ -57,11 +57,26 @@ export async function newComponentGenerator(
 			const relativePath = path.relative(projectSourceRoot, newComponentPath);
 
 			//console.log({ relativePath })
-			const addExport = addImport( indexSourceFile , `export { default as ${name}} from './${relativePath}';` )
+			const addExport = addImport( indexSourceFile , `export { ${name}} from './${relativePath}';` )
 			const changes = applyChangesToString( indexFile, addExport )
 			tree.write(indexFilePath, changes)
 		}
 	}
+
+	if (options.storybook) {
+		await componentStoryGenerator(tree, {
+			...extendedOptions,
+			//TODO componentPath needs to get the correct extention of the file (for now is hardcoded)
+			componentPath: path.relative(projectSourceRoot,path.join(projectSourceRoot,'lib', filename,`${filename}.tsx`)) ,
+			skipFormat: true,
+			interactionTests: true,
+		})
+	}
+
+	if (options.test) {
+		// TODO Component test
+	}
+
 
   await formatFiles(tree);
 }
