@@ -1,8 +1,12 @@
 {
   "name": "nx-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "nx build nx-tool",
+    "deploy": "./deploy.sh",
+    "publish": "npm run build && npm run deploy"
+  },
   "private": true,
   "devDependencies": {
     "@nx/eslint": "18.0.8",
