@@ -1,10 +1,18 @@
+// @vitest-environment jsdom
 import { render } from '@testing-library/react';
 
 import <%= name %> from './<%= filename %>';
 
-describe('<%= name %>', () => {
+describe('<%= name %> Component', () => {
+	let mockedProp = 'Some_string_here'
+	const { baseElement } = render(<<%= name %> label={mockedProp} />);
+
 	it('should render successfully', () => {
-		const { baseElement } = render(<<%= name %>/>);
 		expect(baseElement).toBeTruthy();
 	});
+
+	test('it contains the correct label', () => {
+		let text = document.querySelector('button')?.textContent
+		expect(text).toBe(mockedProp)
+	})
 });
