@@ -12,6 +12,5 @@ git switch main \
 && npm version "$version_bump" -ws --include-workspace-root \
 && git add package*.json packages/**/package*.json \
 && git commit -m "New $version_bump update v$next_version" \
-&& git tag -a "deploy-$version_bump-$next_version" -m "Deploy $1 v $next_version" #\
-#&& git push --follow-tags
-echo "DEBUG: ALL DONE"
+&& git tag -a "deploy-$version_bump-$next_version" -m "Deploy $1 v $next_version" \
+&& git push --follow-tags
