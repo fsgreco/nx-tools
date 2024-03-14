@@ -2,7 +2,7 @@
 
 This package contains a bunch of generator to help developing inside an Nx monorepo.
 
-At the moment it contains only one generator called `new-component`. It help you scaffold a React Typescript component and let you choose if setting up a story file for Storybook, as well as a `.spec` file for testing.
+At the moment it contains only one generator called `new-component`. It helps you scaffold a React Typescript component and let you choose if setting up a story file for Storybook, as well as a `.spec` file for testing.
 
 ## How to use it
 
