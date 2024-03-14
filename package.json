@@ -5,7 +5,7 @@
   "scripts": {
     "build": "nx build nx-tool",
     "deploy": "./deploy.sh",
-    "publish": "npm run build && npm run deploy"
+    "publish": "npm run build && cd dist/packages/nx-tool && npm publish"
   },
   "private": true,
   "devDependencies": {
