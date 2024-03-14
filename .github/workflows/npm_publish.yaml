@@ -1,0 +1,32 @@
+name: 🚀 Deploy with tags 'deploy-*'
+on: 
+  push:
+    tags: deploy-*
+
+jobs:
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Build
+        uses: actions/setup-node@v3
+        run: |
+          npm ci
+          npm run build
+
+      - name: Publish
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: dist/packages/nx-tool # Specify the folder containing the build artifacts
+
+      - name: Notify new version via Telegram
+        if: steps.publish-npm.outputs.type 
+        run: |
+          curl -s \
+          -d "chat_id=${{ secrets.CHAT_ID }}" \
+          -d "text=📦 <strong>${{ github.repository }}</strong>:%0ANew version published <pre>v${{ steps.publish-npm.outputs.version }}</pre>" \
+          https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?parse_mode=html > /dev/null
