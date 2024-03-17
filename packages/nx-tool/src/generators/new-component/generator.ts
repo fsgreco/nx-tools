@@ -63,14 +63,22 @@ export async function newComponentGenerator(
 		}
 	}
 
-	if (options.storybook) {
+	if (!options.storybook) {
+
+
+		const storybookFile = tree.listChanges().find( c => /.*stories.tsx/.test(c.path) ).path
+		tree.delete(storybookFile)
+
+		/* WATING FOR @nx/storybook to update to storybook v8
+		
 		await componentStoryGenerator(tree, {
 			...extendedOptions,
 			//TODO componentPath needs to get the correct extention of the file (for now is hardcoded)
 			componentPath: path.relative(projectSourceRoot,path.join(projectSourceRoot,'lib', filename,`${filename}.tsx`)) ,
 			skipFormat: true,
 			interactionTests: true,
-		})
+		}) */
+
 	}
 
 	if ( !options.test ) {
