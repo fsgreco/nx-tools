@@ -10,7 +10,7 @@ export const <%= name %>: FC<Props> = () => {
 
   return (
 		<Div>
-			ChangeMe
+			ChangeMe <%= name %>
 		</Div>
 	);
 };

@@ -1,23 +1,93 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react';
 import { <%= name %> } from './<%= filename %>';
-
 import { within, expect } from '@storybook/test';
+
+<% if (asyncStory) { %>
+import { rest } from 'msw';
+<% } %>
+
+const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
 
 const meta: Meta<typeof <%= name %>> = {
   component: <%= name %>,
-  title: '<%= name %>',
+  title: '<%= name %>/Normal',
+  parameters: {
+    docs: { // storybook.js.org/docs/api/doc-block-description
+      description: {
+        component: 'This is a <%= name %> with "small" size as default',
+      },
+    },
+  },
+  argTypes: { // https://storybook.js.org/docs/api/arg-types
+    size: {
+      control: 'inline-radio',
+      options: ['small', 'middle', 'large'],
+      defaultValue: 'small',
+			description: "The size of the description"
+    },
+    data: { 
+			control: 'object', 
+			description: 'The data that will be renderd' 
+		},
+  },
+  args: { // https://storybook.js.org/docs/writing-stories/args
+    data: fakeData,
+  },
 };
 export default meta;
 type Story = StoryObj<typeof <%= name %>>;
 
-export const Primary = {
-  args: {},
-};
+/**
+ * Shows a <%= name %> small
+ */
+export const Primary: Story = {
+  args: { size: 'small' },
+}; 
 
-export const Heading: Story = {
+/**
+ * An Empty <%= name %> with `data` as empty array `[]`
+ */
+export const Empty: Story = { args: { data: [] } };
+
+/**
+ * An Loading <%= name %> with `data` as 'undefined'
+ */
+export const LoadingState: Story = { args: { data: undefined } };
+
+/**
+ * Testing Component with play async function
+ */
+export const Testing: Story = {
   args: {},
+	parameters: { docs: { disable: true } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    //expect(canvas.getByText(/Welcome to <%= name %>!/gi)).toBeTruthy();
+    expect(canvas.getByText(/ChangeMe <%= name %>/gi)).toBeTruthy();
   },
 };
+
+<% if (asyncStory) { %>
+/**
+ * This simulates an async loading data
+ */
+export const AsyncLoading: Story = {
+	args: {},
+  parameters: {
+    msw: {
+      handlers: [
+        rest.get('/api/users', (req, res, ctx) => res( ctx.delay(1000), ctx.json(fakeData)) ),
+      ],
+    },
+  },
+  render: function Render(args) {
+    const [data, setData] = React.useState();
+    React.useEffect(() => {
+      fetch('/api/users')
+        .then((res) => res.json())
+        .then((result) => setData(result));
+    }, []);
+    return <<%= name %> data={data} {...args} />;
+  },
+};
+<% } %>

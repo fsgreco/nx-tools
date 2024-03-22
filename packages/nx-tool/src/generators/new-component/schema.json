@@ -24,6 +24,13 @@
 			"x-prompt": "Do you want to generate a stories file?",
 			"default": false
 		},
+		"asyncStory": {
+			"type": "boolean",
+			"description": "Does the storybook need to simulate async calls?",
+			"aliases": ["async", "as"],
+			"default": false,
+			"hidden": false
+		},
 		"test": {
 			"type": "boolean",
 			"x-prompt": "Do you want to generate a test file?",
