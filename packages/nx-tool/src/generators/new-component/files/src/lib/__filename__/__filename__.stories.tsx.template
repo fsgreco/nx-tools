@@ -12,9 +12,11 @@ const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
 const meta: Meta<typeof <%= name %>> = {
   component: <%= name %>,
   title: '<%= name %>/Normal',
+	tags: ['autodocs'], // 👈 empty this to remove auto documentation (alternatively enable "expanded" controls bellow)
   parameters: {
 		// controls: { expanded: true }, // https://storybook.js.org/docs/essentials/controls#configuration
     docs: { // https://storybook.js.org/docs/api/doc-block-description
+			toc: true, // 👈 Enables the table of contents
       description: {
         component: 'This is a <%= name %> with "small" size as default',
       },
