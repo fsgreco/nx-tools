@@ -14,7 +14,7 @@ import { ensureTypescript } from '@nx/js/src/utils/typescript/ensure-typescript'
 
 import { addImport } from '@nx/react/src/utils/ast-utils'
 
-import { componentStoryGenerator } from '@nx/react'
+//import { componentStoryGenerator } from '@nx/react'
 
 export async function newComponentGenerator(
   tree: Tree,
@@ -32,6 +32,12 @@ export async function newComponentGenerator(
 		...options,
 		name,
 		filename
+	}
+
+	// In case choose to have a storybook file (and do not specify `--async` on the command)
+	if (options.storybook && !options.asyncStory) {
+		let answer = await thenAlsoAsk("Do you want that story to have an async test?")
+		if (answer === true) extendedOptions.asyncStory = true
 	}
 
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, extendedOptions);
@@ -107,3 +113,32 @@ export async function newComponentGenerator(
 }
 
 export default newComponentGenerator;
+
+
+/**
+ * Asks a direct question and returns a promise that will resolve in a boolean value 
+ * @param question The question need to accept either yes/y or no/n
+ * @returns 
+ */
+async function thenAlsoAsk( question: string ) {
+	let readline = await import("node:readline/promises")
+	const rl = readline.createInterface({ terminal:true, input: process.stdin, output: process.stdout, })
+	const answer = await rl.question(question + " [y/yes | n/no] ")
+	//console.log("Nice", answer)
+	let result = ["y","yes","yeah","sure"].includes(answer.toLowerCase().trim())
+	return result
+}
+
+/* // TODO test it if using enquirer
+async function thenAlsoAsk( question: string ) {
+	const { prompt } = await import('enquirer')
+	let answer = await prompt({
+		type: 'confirm',
+		name: 'async',
+		message: `${question}`
+	})
+	//console.log({answer})
+	//@ts-expect-error
+	return answer.async
+}
+*/
