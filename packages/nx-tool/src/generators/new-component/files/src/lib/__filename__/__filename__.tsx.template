@@ -4,13 +4,16 @@ import styled from 'styled-components'
 const Div = styled.div`  `
 
 /* eslint-disable-next-line */
-interface Props {}
+interface Props {
+	/** This will be the description in storybook */
+	label?: string
+}
 
-export const <%= name %>: FC<Props> = () => {
+export const <%= name %>: FC<Props> = ({label}) => {
 
   return (
 		<Div>
-			ChangeMe <%= name %>
+			{label} <%= name %>
 		</Div>
 	);
 };

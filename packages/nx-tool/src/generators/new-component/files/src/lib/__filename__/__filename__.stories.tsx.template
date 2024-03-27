@@ -13,7 +13,8 @@ const meta: Meta<typeof <%= name %>> = {
   component: <%= name %>,
   title: '<%= name %>/Normal',
   parameters: {
-    docs: { // storybook.js.org/docs/api/doc-block-description
+		// controls: { expanded: true }, // https://storybook.js.org/docs/essentials/controls#configuration
+    docs: { // https://storybook.js.org/docs/api/doc-block-description
       description: {
         component: 'This is a <%= name %> with "small" size as default',
       },
@@ -24,11 +25,11 @@ const meta: Meta<typeof <%= name %>> = {
       control: 'inline-radio',
       options: ['small', 'middle', 'large'],
       defaultValue: 'small',
-			description: "The size of the description"
+			description: "The size of the component"
     },
     data: { 
 			control: 'object', 
-			description: 'The data that will be renderd' 
+			description: 'The data that will be rendered' 
 		},
   },
   args: { // https://storybook.js.org/docs/writing-stories/args
