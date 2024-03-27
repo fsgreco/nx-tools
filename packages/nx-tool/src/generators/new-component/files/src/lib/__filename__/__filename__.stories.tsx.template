@@ -1,15 +1,21 @@
-import React from 'react'
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { <%= name %> } from './<%= filename %>';
 import { within, expect } from '@storybook/test';
-
 <% if (asyncStory) { %>
 import { rest } from 'msw';
 <% } %>
 
+/** The component to be rendered */
+import { <%= name %> } from './<%= filename %>';
+
+/** Infered types  */
+type MetaTypes = Meta<typeof <%= name %>>
+type Story = StoryObj<typeof <%= name %>>;
+
+
 const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
 
-const meta: Meta<typeof <%= name %>> = {
+const meta: MetaTypes = {
   component: <%= name %>,
   title: '<%= name %>/Normal',
 	tags: ['autodocs'], // 👈 empty this to remove auto documentation (alternatively enable "expanded" controls bellow)
@@ -23,6 +29,7 @@ const meta: Meta<typeof <%= name %>> = {
     },
   },
   argTypes: { // https://storybook.js.org/docs/api/arg-types
+    /*
     size: {
       control: 'inline-radio',
       options: ['small', 'middle', 'large'],
@@ -33,30 +40,21 @@ const meta: Meta<typeof <%= name %>> = {
 			control: 'object', 
 			description: 'The data that will be rendered' 
 		},
+		*/
   },
   args: { // https://storybook.js.org/docs/writing-stories/args
-    data: fakeData,
+    /* data: fakeData, */
+		label: "Hello",
   },
 };
 export default meta;
-type Story = StoryObj<typeof <%= name %>>;
 
 /**
- * Shows a <%= name %> small
+ * Shows a <%= name %> with different label
  */
 export const Primary: Story = {
-  args: { size: 'small' },
+  args: { label: "Hello World" },
 }; 
-
-/**
- * An Empty <%= name %> with `data` as empty array `[]`
- */
-export const Empty: Story = { args: { data: [] } };
-
-/**
- * An Loading <%= name %> with `data` as 'undefined'
- */
-export const LoadingState: Story = { args: { data: undefined } };
 
 /**
  * Testing Component with play async function
@@ -66,7 +64,7 @@ export const Testing: Story = {
 	parameters: { docs: { disable: true } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/ChangeMe <%= name %>/gi)).toBeTruthy();
+    expect(canvas.getByText(/Hello <%= name %>/gi)).toBeTruthy();
   },
 };
 
