@@ -4,9 +4,10 @@ import { spawnSync } from "node:child_process"
 const path = require('path')
 
 const projectDir = process.env.INIT_CWD || path.resolve('../../');
-console.log({projectDir})
+process.chdir(projectDir)
+
 //console.log({withUrl:new URL("../../", __dirname)})
-const tree = new FsTree( projectDir, false )
+const tree = new FsTree( process.cwd(), false )
 
 // If both of this are false then hic sunt leones (it is not an Nx project)
 const isNxProject = tree.exists('nx.json') 
