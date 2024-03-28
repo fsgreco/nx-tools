@@ -1,8 +1,12 @@
 import { FsTree } from "nx/src/generators/tree"
 import { readJsonFile /* , updateJson  */} from "@nx/devkit"
 import { spawnSync } from "node:child_process"
+const path = require('path')
 
-const tree = new FsTree( process.cwd() , false )
+const projectDir = process.env.INIT_CWD || path.resolve();
+
+//console.log({withUrl:new URL("../../", __dirname)})
+const tree = new FsTree( projectDir, false )
 
 // If both of this are false then hic sunt leones (it is not an Nx project)
 const isNxProject = tree.exists('nx.json') 
