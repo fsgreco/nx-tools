@@ -1,10 +1,10 @@
 import { FsTree } from "nx/src/generators/tree"
 import { readJsonFile /* , updateJson  */} from "@nx/devkit"
 import { spawnSync } from "node:child_process"
-import * as path from 'path';
+//import * as path from 'path';
 
-//const projectDir = process.env.INIT_CWD || path.resolve('../../');
-const projectDir = process.env.INIT_CWD || path.dirname( path.dirname( process.cwd() ) )
+//const projectDir = process.env.INIT_CWD || path.resolve('../../') || path.dirname( path.dirname( process.cwd() ) )
+const projectDir = process.env.INIT_CWD || process.cwd()  
 
 process.chdir(projectDir)
 
