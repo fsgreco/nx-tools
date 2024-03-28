@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "nx build nx-tool",
-    "postbuild": "cd dist/packages/nx-tool && npm pkg set scripts.postinstall=\"node src/postinstall.js\"",
+    "postbuild": "cd dist/packages/nx-tool && npm pkg set scripts.postinstall=\"node ./src/postinstall.js\" && chmod +x initial-setup.js",
     "deploy": "./deploy.sh",
     "publish": "npm run build && cd dist/packages/nx-tool && npm publish"
   },
