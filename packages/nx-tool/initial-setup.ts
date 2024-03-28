@@ -3,13 +3,12 @@ import { FsTree } from "nx/src/generators/tree"
 import { readJsonFile /* , updateJson  */} from "@nx/devkit"
 import { spawnSync } from "node:child_process"
 
-//console.log({withUrl:new URL("../../", __dirname)})
+
 const tree = new FsTree( process.cwd(), false )
 
 // If both of this are false then hic sunt leones (it is not an Nx project)
 const isNxProject = tree.exists('nx.json') 
 const hasProjectJson = tree.exists('project.json') 
-//console.log({root: tree.root, isNxProject, hasProjectJson})
 
 // Read the package Json to known if this is an npm monorepo
 const packageJson = readJsonFile(tree.root + '/package.json') satisfies Record<string,any>
@@ -17,7 +16,6 @@ const packageJson = readJsonFile(tree.root + '/package.json') satisfies Record<s
 // check if package.json is not an npm monorepo and does not have "nx" property
 const hasNx = packageJson.hasOwnProperty('nx')
 const hasWorkspaces = packageJson.hasOwnProperty('workspaces')
-//console.log({hasNx, hasWorkspaces})
 
 const parseExitCode = (code:number | null) => code === 0 ? '✅' : '🔴'
 
@@ -33,4 +31,4 @@ if (!hasScript) {
 	console.log(parseExitCode(result?.status) + ' Add new script on package.json')
 }
 
-console.log('✅ Finished')
+console.log('✅ All done.')
