@@ -121,24 +121,12 @@ export default newComponentGenerator;
  * @returns 
  */
 async function thenAlsoAsk( question: string ) {
-	let readline = await import("node:readline/promises")
-	const rl = readline.createInterface({ terminal:true, input: process.stdin, output: process.stdout, })
-	const answer = await rl.question(question + " [y/yes | n/no] ")
-	//console.log("Nice", answer)
-	let result = ["y","yes","yeah","sure"].includes(answer.toLowerCase().trim())
-	return result
-}
-
-/* // TODO test it if using enquirer
-async function thenAlsoAsk( question: string ) {
 	const { prompt } = await import('enquirer')
 	let answer = await prompt({
 		type: 'confirm',
 		name: 'async',
 		message: `${question}`
-	})
+	}) satisfies { async:boolean }
 	//console.log({answer})
-	//@ts-expect-error
 	return answer.async
 }
-*/
