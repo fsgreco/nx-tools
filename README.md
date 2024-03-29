@@ -13,7 +13,8 @@ To use and install the generator [consult it's readme](/packages/nx-tool/README.
 
 ## Understand the CI Workflow
 
-![CI Workflow process](/assets/nx-tool-ci-workflow-dark.png)
+![CI Workflow process](/assets/nx-tool-ci-workflow-white-bg.png)
+
 
 ---
 
