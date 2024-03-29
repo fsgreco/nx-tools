@@ -6,11 +6,26 @@ At the moment it contains only one generator called `new-component`. It helps yo
 
 ## How to use it
 
-First install it on your own monorepo:
+First install it on your own project:
 ```sh
 npm install -D nx-tool
 ```
-Then use it like any other generator and follow the prompted guided proceedure (short version):
+To execute it you only need this command:
+```bash
+npm run new:component [your_component_name] [-- --dry-run] 
+```
+
+**You can now run it everywhere!**  
+Meaning not only in Nx projects but also in any NodeJs project.  
+In case the command about doesn't work run this to adeguate your `package.json`:
+```bash
+npx nx-tool equip
+```
+
+--- 
+
+### More information and alternative commands: 
+This tool works like any other Nx generator and follow the prompted guided proceedure (short version):
 ```sh
 nx g new-component [your_component_name]
 ```
