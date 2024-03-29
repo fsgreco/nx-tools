@@ -1,6 +1,10 @@
 {
   "name": "nx-tool",
   "version": "1.4.1",
+  "author": "Santiago Greco <fsgreco@fastmail.com> (https://github.com/fsgreco)",
+  "license": "MIT",
+  "keywords": ["nx","boilerplate","helper","generator"],
+  "description": "Nx generator that aims to help the frontend developing process by scaffolding boilerplate for you. It works on any workspace, even not Nx projects",
   "dependencies": {
     "tslib": "^2.3.0"
   },
