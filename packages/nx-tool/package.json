@@ -11,7 +11,7 @@
     "@nx/react": "*"
   },
   "bin": {
-    "equip": "initial-setup.js"
+    "equip": "./initial-setup.js"
   },
   "type": "commonjs",
   "main": "./src/index.js",
