@@ -25,13 +25,15 @@ export async function newComponentGenerator(
 	const projectRoot = project.root
 	const projectSourceRoot = project.sourceRoot ?? project.root
 	
+	const dirname = project.sourceRoot ? 'lib' : 'components'
 	const filename = names(options.name).fileName
 	const name = names(options.name).className
 
 	const extendedOptions = {
 		...options,
 		name,
-		filename
+		filename,
+		dirname
 	}
 
 	// In case choose to have a storybook file (and do not specify `--async` on the command)
@@ -56,8 +58,8 @@ export async function newComponentGenerator(
 		if ( indexFile !== null ) {
 			let indexSourceFile = tsModule.createSourceFile(indexFilePath,indexFile,tsModule.ScriptTarget.Latest, true)
 
-			// Assumes the new component is at 'src/lib/NewComponent' - check `files` folder
-			const newComponentPath = path.join( projectSourceRoot, 'lib', filename, filename);
+			// will be defined according to project: 'src/{lib,components}/NewComponent' - check `files` folder
+			const newComponentPath = path.join( projectSourceRoot, dirname, filename, filename);
 
 			// Get the relative path from the project source root to the new component
 			const relativePath = path.relative(projectSourceRoot, newComponentPath);

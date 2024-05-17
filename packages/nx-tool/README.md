@@ -2,7 +2,7 @@
 
 This package contains an Nx generator that aims to help the frontend developing process by generating and scaffolding boilerplate for you.
 
-✨ **You can run it everywhere!** ✨ 
+✨ **You can run it everywhere!** ✨  
 Meaning not only in Nx projects but also in any NodeJs frontend project.  
 
 At the moment it contains only one generator called `new-component`.  
