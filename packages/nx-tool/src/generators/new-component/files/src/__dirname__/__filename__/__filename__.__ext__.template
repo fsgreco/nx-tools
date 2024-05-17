@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import React <%- language === 'ts' ? ', { FC }' : '' %> from 'react';
 import styled from 'styled-components'
 
 const Div = styled.div`  `
 
+<% if (language === 'ts') { %>
 /* eslint-disable-next-line */
 interface Props {
 	/** This will be the description in storybook */
 	label?: string
 }
+<% } %>
 
-export const <%= name %>: FC<Props> = ({label}) => {
+export const <%= name %> <%- language === 'ts' ? ': FC<Props>' : '' %> = ({label}) => {
 
   return (
 		<Div>

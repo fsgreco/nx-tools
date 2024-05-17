@@ -4,4 +4,5 @@ export interface NewComponentGeneratorSchema {
 	storybook: boolean;
 	asyncStory?: boolean;
 	test: boolean;
+	language?: string;
 }

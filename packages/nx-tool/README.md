@@ -26,8 +26,11 @@ npm run new:component
 #### With optional arguments:
 You can pass optional arguments too:
 ```bash
-npm run new:component [component_name] [-- --dry-run]
+npm run new:component [component_name] [-- --lang js --dry-run]
 ```
+
+Among the new arguments it is possible to choose between `tsx` (default) or `jsx` files. 
+In order to obtain a `jsx` file pass the option `-- --lang js`.
 
 #### Understand this generator
 This tool works like any other Nx generator and follow the prompted guided proceedure.  

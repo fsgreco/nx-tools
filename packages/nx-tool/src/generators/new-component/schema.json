@@ -31,6 +31,13 @@
 			"default": false,
 			"hidden": true
 		},
+		"language": {
+			"type": "string",
+			"description": "choose between javascript ('js') or typescript ('ts')",
+			"aliases": ["lang", "l"],
+			"enum": ["js", "ts"],
+			"default": "ts"
+		},
 		"test": {
 			"type": "boolean",
 			"x-prompt": "Do you want to generate a test file?",

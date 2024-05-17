@@ -33,7 +33,8 @@ export async function newComponentGenerator(
 		...options,
 		name,
 		filename,
-		dirname
+		dirname,
+		ext: options.language === 'ts' ? 'tsx' : 'jsx'
 	}
 
 	// In case choose to have a storybook file (and do not specify `--async` on the command)
@@ -49,7 +50,7 @@ export async function newComponentGenerator(
 	 * Consult examples on nx/react/generators/component 
 	 */
 	const isApp = project.projectType === 'application'
-	if (!isApp) {
+	if (!isApp && options.language === 'ts') {
 		let indexFilePath = joinPathFragments(projectSourceRoot, 'index.ts') // use projectSourceRoot directly ?
 		let indexFile = tree.read(indexFilePath, 'utf-8')
 
@@ -74,7 +75,7 @@ export async function newComponentGenerator(
 	if (!options.storybook) {
 
 
-		const storybookFile = tree.listChanges().find( c => /.*stories.tsx/.test(c.path) ).path
+		const storybookFile = tree.listChanges().find( c => /.*stories.*sx/.test(c.path) ).path
 		tree.delete(storybookFile)
 
 		/* WATING FOR @nx/storybook to update to storybook v8
@@ -90,7 +91,7 @@ export async function newComponentGenerator(
 	}
 
 	if ( !options.test ) {
-		const testFile = tree.listChanges().find( c => /.*spec.tsx/.test(c.path) ).path
+		const testFile = tree.listChanges().find( c => /.*spec.*sx/.test(c.path) ).path
 		tree.delete(testFile)
 	}
 

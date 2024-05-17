@@ -1,5 +1,7 @@
 import React from 'react';
+<% if (language === 'ts') { %>
 import type { Meta, StoryObj } from '@storybook/react';
+<% } %>
 import { within, expect } from '@storybook/test';
 <% if (asyncStory) { %>
 import { rest } from 'msw';
@@ -8,14 +10,15 @@ import { rest } from 'msw';
 /** The component to be rendered */
 import { <%= name %> } from './<%= filename %>';
 
+<% if (language === 'ts') { %>
 /** Infered types  */
 type MetaTypes = Meta<typeof <%= name %>>
 type Story = StoryObj<typeof <%= name %>>;
-
+<% } %>
 
 const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
 
-const meta: MetaTypes = {
+const meta<%- language === 'ts' ? ': MetaTypes' : '' %> = {
   component: <%= name %>,
   title: '<%= name %>/Normal',
 	tags: ['autodocs'], // 👈 empty this to remove auto documentation (alternatively enable "expanded" controls bellow)
@@ -52,14 +55,14 @@ export default meta;
 /**
  * Shows a <%= name %> with different label
  */
-export const Primary: Story = {
+export const Primary<%- language === 'ts' ? ': Story' : '' %> = {
   args: { label: "Hello World" },
 }; 
 
 /**
  * Testing Component with play async function
  */
-export const Testing: Story = {
+export const Testing<%- language === 'ts' ? ': Story' : '' %> = {
   args: {},
 	parameters: { docs: { disable: true } },
   play: async ({ canvasElement }) => {
@@ -72,7 +75,7 @@ export const Testing: Story = {
 /**
  * This simulates an async loading data
  */
-export const AsyncLoading: Story = {
+export const AsyncLoading<%- language === 'ts' ? ': Story' : '' %> = {
 	args: {},
   parameters: {
     msw: {
