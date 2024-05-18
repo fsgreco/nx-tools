@@ -38,6 +38,11 @@
 			"enum": ["js", "ts"],
 			"default": "ts"
 		},
+		"directory": {
+			"type": "string",
+			"description": "A custom directory where you want to put your component",
+			"aliases": ["dir"]
+		},
 		"test": {
 			"type": "boolean",
 			"x-prompt": "Do you want to generate a test file?",

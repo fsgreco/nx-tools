@@ -25,7 +25,7 @@ export async function newComponentGenerator(
 	const projectRoot = project.root
 	const projectSourceRoot = project.sourceRoot ?? project.root
 	
-	const dirname = project.sourceRoot ? 'lib' : 'components'
+	const dirname = options?.directory ? options.directory : ( project.sourceRoot ? 'lib' : 'components' )
 	const filename = names(options.name).fileName
 	const name = names(options.name).className
 

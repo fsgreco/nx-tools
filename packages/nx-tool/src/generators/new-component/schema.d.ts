@@ -5,4 +5,5 @@ export interface NewComponentGeneratorSchema {
 	asyncStory?: boolean;
 	test: boolean;
 	language?: string;
+	directory?: string;
 }
