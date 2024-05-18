@@ -11,6 +11,13 @@ interface Props {
 }
 <% } %>
 
+<% if (language === 'js' ) { %>
+/**
+ * <%= name %> Component
+ * @param {{ label:string }} param0 
+ * @returns {React.FC}
+ */
+<% } %>
 export const <%= name %> <%- language === 'ts' ? ': FC<Props>' : '' %> = ({label}) => {
 
   return (
