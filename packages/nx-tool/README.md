@@ -29,7 +29,7 @@ You can pass optional arguments too:
 npm run new:component [component_name] [-- --lang js --dir hooks --dry-run]
 ```
 
-|   Command  | shorthand |                                                             Description                                                |
+|   Option   | shorthand |                                                             Description                                                |
 |:----------:|:---------:|------------------------------------------------------------------------------------------------------------------------|
 |  --dir     |           | Choose a custom directory. By default it will be either `lib` (if script recognizes an Nx library) or `components`.  |
 |  --lang    |     -l    | Choose between `js` or `ts` (default) / files will be generated with `.jsx` or `.tsx` extensions    |
