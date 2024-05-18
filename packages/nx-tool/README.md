@@ -26,11 +26,17 @@ npm run new:component
 #### With optional arguments:
 You can pass optional arguments too:
 ```bash
-npm run new:component [component_name] [-- --lang js --dry-run]
+npm run new:component [component_name] [-- --lang js --dir hooks --dry-run]
 ```
 
-Among the new arguments it is possible to choose between `tsx` (default) or `jsx` files. 
-In order to obtain a `jsx` file pass the option `-- --lang js`.
+|   Command  | shorthand |                                                             Description                                                |
+|:----------:|:---------:|------------------------------------------------------------------------------------------------------------------------|
+|  --dir     |           | Choose a custom directory. By default it will be either `lib` (if script recognizes an Nx library) or `components`.  |
+|  --lang    |     -l    | Choose between `js` or `ts` (default) / files will be generated with `.jsx` or `.tsx` extensions    |
+|  --dry-run |           | No changes will be made, the CLI will only show you what changes will be made    |
+
+
+Remember: if you use the npm scripts command prefix the options with `-- `, e.g. `npm run new:component -- --lang js`.
 
 #### Understand this generator
 This tool works like any other Nx generator and follow the prompted guided proceedure.  
