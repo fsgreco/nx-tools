@@ -20,8 +20,8 @@ describe('<%= name %> Component', () => {
 
 	test.todo('it contains the correct label', () => {
 		render(<<%= name %> label={mockedProp} />)
-		let Btn = screen.getByRole("button", {name: `/<%= name %>/i`})
-		expect(Btn.textContent).toBe(`${mockedProp} <%= name %>`)
+		let Btn = screen.queryAllByRole("button", {name: `/<%= name %>/i`})
+		expect(Btn[0]?.textContent).toBe(`${mockedProp} <%= name %>`)
 		// OR
 		//let text = document.querySelector('button')?.textContent
 		//expect(text).toBe(`${mockedProp} <%= name %>`)
