@@ -1,7 +1,13 @@
 import React <%- language === 'ts' ? ', { FC }' : '' %> from 'react';
+<% if (styles === 'styled-components') { %>
 import styled from 'styled-components'
 
-const Div = styled.div`  `
+const Div = styled.div`
+	font-weight: bold;
+`
+<% } else if (styles === 'css') { %>
+const styles = { fontWeight: 'bold' }
+<% } %>
 
 <% if (language === 'ts') { %>
 /* eslint-disable-next-line */
@@ -15,15 +21,14 @@ interface Props {
 /**
  * <%= name %> Component
  * @param {{ label:string }} param0 
- * @returns {React.FC}
- */
-<% } %>
+ * @returns {React.JSX.Element}
+ */<% } %>
 export const <%= name %> <%- language === 'ts' ? ': FC<Props>' : '' %> = ({label}) => {
 
   return (
-		<Div>
+		<<%= styles === 'styled-components' ? 'Div' : 'div' %> <%- styles === 'css' ? 'style={styles}' : '' %>>
 			{label} <%= name %>
-		</Div>
+		</<%= styles === 'styled-components' ? 'Div' : 'div' %>>
 	);
 };
 

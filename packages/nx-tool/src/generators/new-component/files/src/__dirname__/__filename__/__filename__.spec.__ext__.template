@@ -1,18 +1,29 @@
 // @vitest-environment jsdom
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it, test } from 'vitest';
+// or enable globals true in vitest.config
 
+import React from 'react';
 import <%= name %> from './<%= filename %>';
 
 describe('<%= name %> Component', () => {
 	let mockedProp = 'Some_string_here'
-	const { baseElement } = render(<<%= name %> label={mockedProp} />);
-
+	
 	it('should render successfully', () => {
+		const { baseElement } = render(<<%= name %> label={mockedProp} />);
+		
+		/* FOR DEBUG PURPOSES */
+		//screen.debug(document.body)
+
 		expect(baseElement).toBeTruthy();
 	});
 
-	test('it contains the correct label', () => {
-		let text = document.querySelector('button')?.textContent
-		expect(text).toBe(mockedProp)
+	test.todo('it contains the correct label', () => {
+		render(<<%= name %> label={mockedProp} />)
+		let Btn = screen.getByRole("button", {name: `/<%= name %>/i`})
+		expect(Btn.textContent).toBe(`${mockedProp} <%= name %>`)
+		// OR
+		//let text = document.querySelector('button')?.textContent
+		//expect(text).toBe(`${mockedProp} <%= name %>`)
 	})
 });

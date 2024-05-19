@@ -31,12 +31,35 @@ npm run new:component [component_name] [-- --lang js --dir hooks --dry-run]
 
 |   Option   | shorthand |                                                             Description                                                |
 |:----------:|:---------:|------------------------------------------------------------------------------------------------------------------------|
-|  --dir     |           | Choose a custom directory. By default it will be either `lib` (if script recognizes an Nx library) or `components`.  |
-|  --lang    |     -l    | Choose between `js` or `ts` (default) / files will be generated with `.jsx` or `.tsx` extensions    |
-|  --dry-run |           | No changes will be made, the CLI will only show you what changes will be made    |
+|  --test    |     -t    | Choose between `false` or `true` (in case simply pass `-t`) to have a test file too.  |
+|  --style   |     -s    | Choose between `css`,`styled-components`,`none` to decide which style sistem use.  |
+|  --story   |    --sb   | Choose between `false` or `true` (then simply pass `--story` or `--sb`) to have a storybook file too    |
+|  --dir     |     -d    | [Optional] Choose a custom directory. By default its either `components` or `lib` (if it recognizes an Nx library).  |
+|  --lang    |     -l    | [Optional] Choose between `js` or `ts` (default) / files will be generated with `.jsx` or `.tsx` extensions.  |
+|  --dry-run |           | No changes will be made, the CLI will only show you what files should be generated. |
 
+Remember: if you use the npm scripts command prefix the options with `-- `.  
+Some examples:
+```bash
+# A minimal component (no styles, neither test nor storybook files too):
+npm run new:component -- -s none -t false --sb false
 
-Remember: if you use the npm scripts command prefix the options with `-- `, e.g. `npm run new:component -- --lang js`.
+# A component with styled-dictionary and a storybook file too
+npm run new:component -- --style styled-dictionary --story
+
+# A component with `.jsx` extension inside `src/hooks` directory
+npm run new:component -- --lang js --dir hooks
+``` 
+
+#### Suggestion:  
+You can customize your script per project and minimize the questions.  
+Simply change the script inside your `package.json` > `"scripts"` > `"new:component"`.  
+E.g.:
+```json
+"new:component": "npx nx g nx-tool:new-component --style styled-components --lang js"
+```
+With this in place, whenever you run `npm run new:component`, it will always create a component with `styled-components` and `.jsx` extension.
+
 
 #### Understand this generator
 This tool works like any other Nx generator and follow the prompted guided proceedure.  

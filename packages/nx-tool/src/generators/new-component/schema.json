@@ -21,15 +21,14 @@
     },
 		"storybook": {
 			"type": "boolean",
-			"x-prompt": "Do you want to generate a stories file?",
-			"default": false
+			"aliases": ["story", "stories", "sb"],
+			"description": "Add a Storybook stories ready for the component"
 		},
 		"asyncStory": {
 			"type": "boolean",
 			"description": "Does the storybook need to simulate async calls?",
 			"aliases": ["async", "as"],
-			"default": false,
-			"hidden": true
+			"default": false
 		},
 		"language": {
 			"type": "string",
@@ -41,12 +40,37 @@
 		"directory": {
 			"type": "string",
 			"description": "A custom directory where you want to put your component",
-			"aliases": ["dir"]
+			"aliases": ["dir", "d"]
 		},
 		"test": {
 			"type": "boolean",
+			"aliases": ["tests","t"],
 			"x-prompt": "Do you want to generate a test file?",
 			"default": false
+		},
+		"styles": {
+			"type": "string",
+			"aliases": ["s","style"],
+			"description": "The file extension to be used for style files.",
+			"default": "css",
+			"x-prompt": {
+        "message": "Which stylesheet format would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "css",
+            "label": "CSS [ inside the component ]"
+          },
+          {
+            "value": "styled-components",
+            "label": "styled-components [ https://styled-components.com ]"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+				]
+			}
 		}
   },
   "required": ["name","project"]

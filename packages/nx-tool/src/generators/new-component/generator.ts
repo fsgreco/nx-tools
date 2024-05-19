@@ -37,11 +37,23 @@ export async function newComponentGenerator(
 		ext: options.language === 'ts' ? 'tsx' : 'jsx'
 	}
 
-	// In case choose to have a storybook file (and do not specify `--async` on the command)
+	// In case user specified `--async` command asume you also want storybook file
+	if (options.asyncStory) {
+		extendedOptions.storybook = true
+		extendedOptions.asyncStory = true
+	}
+
+	// only if user doesn't pass `--story false` as option.
+	if ( extendedOptions.storybook === undefined ) {
+		let answer = await thenAlsoAsk("Do you want a storybook file for your component?")
+		if (answer === true ) extendedOptions.storybook = true
+	}
+
+	/* OLD way In case choose to have a storybook file (and do not specify `--async` on the command)
 	if (options.storybook && !options.asyncStory) {
 		let answer = await thenAlsoAsk("Do you want that story to have an async test?")
 		if (answer === true) extendedOptions.asyncStory = true
-	}
+	} */
 
   generateFiles(tree, path.join(__dirname, 'files'), projectRoot, extendedOptions);
 	
@@ -72,9 +84,8 @@ export async function newComponentGenerator(
 		}
 	}
 
-	if (!options.storybook) {
-
-
+	// if user choose to not have a storybook file
+	if (!extendedOptions.storybook) {
 		const storybookFile = tree.listChanges().find( c => /.*stories.*sx/.test(c.path) ).path
 		tree.delete(storybookFile)
 
