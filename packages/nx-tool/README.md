@@ -56,12 +56,13 @@ You can customize your script per project and minimize the questions.
 Simply change the script inside your `package.json` > `"scripts"` > `"new:component"`.  
 E.g.:
 ```json
-"new:component": "npx nx g nx-tool:new-component --style styled-components --lang js"
+"new:component": "npx nx g nx-tool:new-component --lang js --style styled-components --story false"
 ```
-With this in place, whenever you run `npm run new:component`, it will always create a component with `styled-components` and `.jsx` extension.
+With this in place, whenever you run `npm run new:component`, the script will always create a component with `.jsx` extension, `styled-components` boilerplate in place and no storybook file (it will not be asked).
 
+--- 
 
-#### Understand this generator
+#### Understand this generator under the hood
 This tool works like any other Nx generator and follow the prompted guided proceedure.  
 Indeed you can run it by using the classic nx command (short version e.g.):
 ```sh
