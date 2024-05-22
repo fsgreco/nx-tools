@@ -16,7 +16,6 @@ type MetaTypes = Meta<typeof <%= name %>>
 type Story = StoryObj<typeof <%= name %>>;
 <% } %>
 
-const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
 
 const meta<%- language === 'ts' ? ': MetaTypes' : '' %> = {
   component: <%= name %>,
@@ -46,7 +45,6 @@ const meta<%- language === 'ts' ? ': MetaTypes' : '' %> = {
 		*/
   },
   args: { // https://storybook.js.org/docs/writing-stories/args
-    /* data: fakeData, */
 		label: "Hello",
   },
 };
@@ -72,6 +70,9 @@ export const Testing<%- language === 'ts' ? ': Story' : '' %> = {
 };
 
 <% if (asyncStory) { %>
+
+const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
+
 /**
  * This simulates an async loading data
  */

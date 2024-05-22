@@ -8,6 +8,9 @@
 version_bump=${1:-'patch'} # major | minor | patch | custom... 
 next_version=$(semver "$npm_package_version" -i "$version_bump")
 
+git fetch --all
+git pull 
+
 git switch main \
 && npm version "$version_bump" -ws --include-workspace-root \
 && git add package*.json packages/**/package*.json \
