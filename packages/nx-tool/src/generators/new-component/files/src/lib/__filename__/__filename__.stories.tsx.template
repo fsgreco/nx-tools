@@ -12,9 +12,6 @@ import { <%= name %> } from './<%= filename %>';
 type MetaTypes = Meta<typeof <%= name %>>
 type Story = StoryObj<typeof <%= name %>>;
 
-
-const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
-
 const meta: MetaTypes = {
   component: <%= name %>,
   title: '<%= name %>/Normal',
@@ -43,7 +40,6 @@ const meta: MetaTypes = {
 		*/
   },
   args: { // https://storybook.js.org/docs/writing-stories/args
-    /* data: fakeData, */
 		label: "Hello",
   },
 };
@@ -69,6 +65,9 @@ export const Testing: Story = {
 };
 
 <% if (asyncStory) { %>
+
+const fakeData = [{key:"1",name:"John",age:32,address:"Street Number 3"}]
+
 /**
  * This simulates an async loading data
  */
