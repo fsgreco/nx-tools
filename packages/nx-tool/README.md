@@ -1,14 +1,16 @@
 # NxTool
 
-This package contains an Nx generator that aims to help the frontend developing process by generating and scaffolding boilerplate for you.
+This package contains an Nx generator called `new-component` that aims to help the frontend developing process by generating and scaffolding boilerplate for you. It scaffolds a React tsx or jsx component and let you choose if setting up a story file for Storybook, as well as a `.spec` file for testing. 
 
 ✨ **You can run it everywhere!** ✨  
 Meaning not only in Nx projects but also in any NodeJs frontend project.  
 
-At the moment it contains only one generator called `new-component`.  
-It scaffolds a React Typescript component and let you choose if setting up a story file for Storybook, as well as a `.spec` file for testing. 
+![new-component-demo](https://github.com/fsgreco/nx-tools/assets/22715417/4ed0cfe4-1ff0-4935-9896-7a640d60a791)
 
-NOTE: at the moment of writing this is in early stages and the generated files are particularly opinionated.
+
+
+
+NOTE: it is still under development, at the moment of writing generated files are particularly opinionated. Feedback is appreciated. 
 
 ## Install and usage
 
