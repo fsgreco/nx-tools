@@ -30,6 +30,12 @@ const meta<%- language === 'ts' ? ': MetaTypes' : '' %> = {
       },
     },
   },
+	/* In case you need redux store integration
+	// https://storybook.js.org/tutorials/intro-to-storybook/react/en/data/
+	decorators: [(story) => {
+		return <Provider store={store}>{story()}</Provider>
+	}],
+	*/
   argTypes: { // https://storybook.js.org/docs/api/arg-types
     /*
     size: {
