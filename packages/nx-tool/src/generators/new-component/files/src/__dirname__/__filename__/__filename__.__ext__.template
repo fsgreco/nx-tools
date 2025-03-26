@@ -11,7 +11,7 @@ const styles = { fontWeight: 'bold' }
 
 <% if (language === 'ts') { %>
 /* eslint-disable-next-line */
-interface Props {
+interface Props extends React.PropsWithChildren {
 	/** This will be the description in storybook */
 	label?: string
 }
@@ -23,7 +23,7 @@ interface Props {
  * @param {{ label:string }} param0 
  * @returns {React.JSX.Element}
  */<% } %>
-export const <%= name %> <%- language === 'ts' ? ': FC<Props>' : '' %> = ({label}) => {
+export const <%= name %> <%- language === 'ts' ? ': FC<Props>' : '' %> = ({label, children}) => {
 
   return (
 		<<%= styles === 'styled-components' ? 'Div' : 'div' %> <%- styles === 'css' ? 'style={styles}' : '' %>>
