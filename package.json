@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "Santiago Greco <fsgreco@fastmail.com> (https://github.com/fsgreco)",
   "scripts": {
+		"test": "nx test nx-tool",
     "build": "nx build nx-tool",
     "postbuild": "cd dist/packages/nx-tool && npm pkg set scripts.postinstall=\"node ./initial-setup.js\" && chmod +x initial-setup.js",
     "deploy": "./deploy.sh",
