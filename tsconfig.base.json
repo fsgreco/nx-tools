@@ -16,10 +16,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["nx-tools"],
-		"paths": {
-			"nx-tool": ["packages/nx-tool/src/index.ts"]
-		}
+    "customConditions": ["nx-tools"]
   },
 	"exclude": ["node_modules", "tmp"]
 }
