@@ -10,20 +10,60 @@
     "generator"
   ],
   "description": "Nx generator that aims to help the frontend developing process by scaffolding boilerplate for you. It works on any workspace, even not Nx projects",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "nx-tools": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/js:tsc",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "options": {
+          "outputPath": "packages/nx-tool/dist",
+          "main": "packages/nx-tool/src/index.ts",
+          "tsConfig": "packages/nx-tool/tsconfig.lib.json",
+          "rootDir": "packages/nx-tool/src",
+          "generatePackageJson": true,
+          "assets": [
+          	"packages/nx-tool/*.md",
+            {
+              "input": "./packages/nx-tool/src",
+              "glob": "**/!(*.ts)",
+              "output": "."
+            },
+            {
+              "input": "./packages/nx-tool/src",
+              "glob": "**/*.d.ts",
+              "output": "."
+            }
+          ]
+        }
+      }
+    }
+  },
   "dependencies": {
+    "@nx/devkit": "22.0.1",
     "tslib": "^2.3.0"
-  },
-  "devDependencies": {
-    "@nx/devkit": "^18.0.0"
-  },
-  "peerDependencies": {
-    "@nx/react": "*"
   },
   "bin": {
     "equip": "./initial-setup.js"
   },
-  "type": "commonjs",
-  "main": "./src/index.js",
-  "typings": "./src/index.d.ts",
-  "generators": "./generators.json"
+	"type": "commonjs",
+  "generators": "./generators.json",
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo",
+    "generators.json"
+  ]
 }
