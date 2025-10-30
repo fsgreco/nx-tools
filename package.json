@@ -4,12 +4,12 @@
   "license": "MIT",
   "author": "Santiago Greco <fsgreco@fastmail.com> (https://github.com/fsgreco)",
   "scripts": {
-		"test": "nx test nx-tool",
+    "test": "nx test nx-tool",
     "build": "nx build nx-tool",
     "postbuild": "cd packages/nx-tool/dist && npm pkg set scripts.postinstall=\"node ./initial-setup.js\" && chmod +x initial-setup.js",
     "deploy": "./deploy.sh",
     "publish": "npm run build && cd packages/nx-tool/dist && npm publish"
-	},
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
