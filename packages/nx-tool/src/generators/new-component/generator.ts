@@ -66,10 +66,9 @@ export async function newComponentGenerator(
 		let indexFilePath = joinPathFragments(projectSourceRoot, 'index.ts') // use projectSourceRoot directly ?
 		let indexFile = tree.read(indexFilePath, 'utf-8')
 
-		let tsModule: typeof import('typescript');
-		if (!tsModule) tsModule = ensureTypescript()
+		const tsModule: typeof import('typescript') = ensureTypescript();
 		if ( indexFile !== null ) {
-			let indexSourceFile = tsModule.createSourceFile(indexFilePath,indexFile,tsModule.ScriptTarget.Latest, true)
+			const indexSourceFile = tsModule.createSourceFile(indexFilePath,indexFile,tsModule.ScriptTarget.Latest, true)
 
 			// will be defined according to project: 'src/{lib,components}/NewComponent' - check `files` folder
 			const newComponentPath = path.join( projectSourceRoot, dirname, filename, filename);
@@ -85,25 +84,27 @@ export async function newComponentGenerator(
 	}
 
 	// if user choose to not have a storybook file
-	if (!extendedOptions.storybook) {
-		const storybookFile = tree.listChanges().find( c => /.*stories.*sx/.test(c.path) ).path
-		tree.delete(storybookFile)
-
-		/* WATING FOR @nx/storybook to update to storybook v8
-		
-		await componentStoryGenerator(tree, {
-			...extendedOptions,
-			//TODO componentPath needs to get the correct extention of the file (for now is hardcoded)
-			componentPath: path.relative(projectSourceRoot,path.join(projectSourceRoot,'lib', filename,`${filename}.tsx`)) ,
-			skipFormat: true,
-			interactionTests: true,
-		}) */
-
-	}
+		if (!extendedOptions.storybook) {
+			const change = tree.listChanges().find( c => /.*stories.*sx/.test(c.path) );
+			if (change?.path) {
+				tree.delete(change.path);
+			}
+	
+			/* WATING FOR @nx/storybook to update to storybook v8
+			
+			await componentStoryGenerator(tree, {
+				...extendedOptions,
+				//TODO componentPath needs to get the correct extention of the file (for now is hardcoded)
+				componentPath: path.relative(projectSourceRoot,path.join(projectSourceRoot,'lib', filename,`${filename}.tsx`)) ,
+				skipFormat: true,
+				interactionTests: true,
+			}) */
+	
+		}
 
 	if ( !options.test ) {
-		const testFile = tree.listChanges().find( c => /.*spec.*sx/.test(c.path) ).path
-		tree.delete(testFile)
+		const testFile = tree.listChanges().find( c => /.*spec.*sx/.test(c.path) )?.path
+		if (testFile) tree.delete(testFile)
 	}
 
 	/* Another approach is to use template literals https://www.youtube.com/live/bZ7RsNTfQPY?si=fdlWqLv1xqJ-Qfz6&t=4500
