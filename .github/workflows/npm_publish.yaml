@@ -17,13 +17,14 @@ jobs:
           npm ci
           npm test
           npm run build
+          npm run postbuild:CI
 
       - name: Publish
         id: publish-npm
         uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: packages/nx-tool/dist # Specify the folder containing the build artifacts
+          package: packages/nx-tool # Specify the folder containing the build artifacts
 
       - name: Notify new version via Telegram
         if: steps.publish-npm.outputs.type 

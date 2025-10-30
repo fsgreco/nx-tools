@@ -1,6 +1,6 @@
 {
   "name": "nx-tool",
-  "version": "2.3.0",
+  "version": "2.3.4",
   "author": "Santiago Greco <fsgreco@fastmail.com> (https://github.com/fsgreco)",
   "license": "MIT",
   "keywords": [
@@ -34,9 +34,8 @@
           "main": "packages/nx-tool/src/index.ts",
           "tsConfig": "packages/nx-tool/tsconfig.lib.json",
           "rootDir": "packages/nx-tool/src",
-          "generatePackageJson": true,
+          "generatePackageJson": false,
           "assets": [
-            "packages/nx-tool/*.md",
             {
               "input": "./packages/nx-tool/src",
               "glob": "**/!(*.ts)",
@@ -57,7 +56,7 @@
     "tslib": "^2.3.0"
   },
   "bin": {
-    "equip": "./initial-setup.js"
+    "equip": "./dist/initial-setup.js"
   },
   "type": "commonjs",
   "generators": "./generators.json",
