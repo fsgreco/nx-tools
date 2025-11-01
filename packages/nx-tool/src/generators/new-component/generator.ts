@@ -14,6 +14,8 @@ import { ensureTypescript } from '@nx/js/src/utils/typescript/ensure-typescript'
 
 import { addImport } from '@nx/react/src/utils/ast-utils'
 
+import { prompt } from 'enquirer'
+
 //import { componentStoryGenerator } from '@nx/react'
 
 export async function newComponentGenerator(
@@ -136,7 +138,6 @@ export default newComponentGenerator;
  * @returns 
  */
 async function thenAlsoAsk( question: string ) {
-	const { prompt } = await import('enquirer')
 	let answer = await prompt({
 		type: 'confirm',
 		name: 'async',
