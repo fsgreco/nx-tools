@@ -31,5 +31,5 @@ jobs:
         run: |
           curl -s \
           -d "chat_id=${{ secrets.CHAT_ID }}" \
-          -d "text=📦 <strong>${{ github.repository }}</strong>:%0ANew version published <pre>v${{ steps.publish-npm.outputs.version }}</pre>" \
+          -d "text=📦 <strong>${{ github.repository }}</strong>:%0ANew version published <pre>v${{ steps.publish-npm.outputs.version }}</pre>%0A%0A🔗 <a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">GitHub Action Run</a>%0A📦 <a href=\"https://www.npmjs.com/package/${{ steps.publish-npm.outputs.name }}\">NPM Package</a>" \
           https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?parse_mode=html > /dev/null
