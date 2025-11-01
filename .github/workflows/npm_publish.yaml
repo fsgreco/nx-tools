@@ -13,6 +13,8 @@ jobs:
 
       - name: Build
         uses: actions/setup-node@v6
+        with:
+          package-manager-cache: true
       - run: |
           npm ci --legacy-peer-deps
           npm test
