@@ -1,6 +1,6 @@
 {
   "name": "nx-tools",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "author": "Santiago Greco <fsgreco@fastmail.com> (https://github.com/fsgreco)",
   "scripts": {
