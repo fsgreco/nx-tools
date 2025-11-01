@@ -1,8 +1,8 @@
 {
   "generators": {
     "new-component": {
-      "factory": "./src/generators/new-component/generator",
-      "schema": "./src/generators/new-component/schema.json",
+      "factory": "./dist/generators/new-component/generator",
+      "schema": "./dist/generators/new-component/schema.json",
       "description": "new-component generator"
     }
   }

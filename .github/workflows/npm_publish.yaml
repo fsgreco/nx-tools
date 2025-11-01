@@ -9,25 +9,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout project
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build
-        uses: actions/setup-node@v3 # TODO https://github.blog/changelog/2023-09-22-github-actions-transitioning-from-node-16-to-node-20/.
+        uses: actions/setup-node@v6
       - run: |
           npm ci
+          npm test
           npm run build
+          npm run postbuild:CI
 
       - name: Publish
         id: publish-npm
-        uses: JS-DevTools/npm-publish@v3
+        uses: JS-DevTools/npm-publish@v4
         with:
           token: ${{ secrets.NPM_TOKEN }}
-          package: dist/packages/nx-tool # Specify the folder containing the build artifacts
+          package: packages/nx-tool # Specify the folder containing the build artifacts
 
       - name: Notify new version via Telegram
         if: steps.publish-npm.outputs.type 
         run: |
           curl -s \
           -d "chat_id=${{ secrets.CHAT_ID }}" \
-          -d "text=📦 <strong>${{ github.repository }}</strong>:%0ANew version published <pre>v${{ steps.publish-npm.outputs.version }}</pre>" \
+          -d "text=📦 <strong>${{ github.repository }}</strong>:%0ANew version published <pre>v${{ steps.publish-npm.outputs.version }}</pre>%0A%0A🔗 <a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">GitHub Action Run</a>%0A📦 <a href=\"https://www.npmjs.com/package/${{ steps.publish-npm.outputs.name }}\">NPM Package</a>" \
           https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage?parse_mode=html > /dev/null
