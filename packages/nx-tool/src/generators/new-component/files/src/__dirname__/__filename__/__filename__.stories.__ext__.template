@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 <% if (language === 'ts') { %>
 import type { Meta, StoryObj } from '@storybook/react';
 <% } %>
@@ -92,8 +92,8 @@ export const AsyncLoading<%- language === 'ts' ? ': Story' : '' %> = {
     },
   },
   render: function Render(args) {
-    const [data, setData] = React.useState();
-    React.useEffect(() => {
+    const [data, setData] = useState();
+    useEffect(() => {
       fetch('/api/users')
         .then((res) => res.json())
         .then((result) => setData(result));
